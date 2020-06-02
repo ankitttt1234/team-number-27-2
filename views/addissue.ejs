@@ -1,0 +1,25 @@
+
+<%- include('partials/header');-%>
+
+  <section id="content-wrapper" class="container">
+      <div class="row" >
+          <div class="col">
+
+          <h3 style="text-align:center;">Add Issue</h3>
+
+          <h6>If you have any issues regarding the facilities, please submit here.</h6>
+
+          <form action="/addissue" method="POST">
+          	<input type="text" class="form-control" placeholder="Enter your issue" style="width:50%;" name="issue" autocomplete="off" required></input>
+          	<br>
+          	<button class="btn btn-danger">Submit</button>
+          </form>
+
+
+          </div>
+      </div>
+  </section>
+
+<%- include('partials/footer');-%>
+
+
