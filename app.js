@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -13,8 +14,8 @@ const formidable = require('formidable');
 
 const app = express();
 
-var accountSid = 'ACa2b3b7ac72000908416a77d9c9499ab8'; // Your Account SID from www.twilio.com/console
-var authToken = '122c662b88557d08dc44fb6512a5a456';   // Your Auth Token from www.twilio.com/console
+var accountSid = process.env.AC; // Your Account SID from www.twilio.com/console
+var authToken = process.env.AUTH;   // Your Auth Token from www.twilio.com/console
 
 var twilio = require('twilio');
 var client = new twilio(accountSid, authToken);
