@@ -8,9 +8,16 @@ const session = require('express-session');
 const formidable = require('formidable');
  
 
+
  
 
 const app = express();
+
+var accountSid = 'ACa2b3b7ac72000908416a77d9c9499ab8'; // Your Account SID from www.twilio.com/console
+var authToken = '122c662b88557d08dc44fb6512a5a456';   // Your Auth Token from www.twilio.com/console
+
+var twilio = require('twilio');
+var client = new twilio(accountSid, authToken);
 
 // Middleware
 
@@ -130,6 +137,19 @@ app.post("/addissue",function(req,res){
 			if(err){
 				res.render("result",{success:false,msg:"Coudnt file the issue"});
 			} else{
+				const notificationOpts = {
+					toBinding: JSON.stringify({
+					  binding_type: 'sms',
+					  address: '+919063969700',
+					}),
+					body: req.body.issue +"--sent from "+data[0].roll,
+				  };
+				  
+				  client.notify
+					.services('IS4f5d638fe1fc27872626d1dd53d0b771')
+					.notifications.create(notificationOpts)
+					.then(notification => console.log(notification.sid))
+					.catch(error => console.log(error));
 				res.render("result",{success:true,msg:"Successfully submitted the issue"});
 			}
 		});
